@@ -1,0 +1,52 @@
+name: Son
+options:
+  bundleIdPrefix: com.zwgagne
+  deploymentTarget:
+    macOS: "14.2"
+  xcodeVersion: "16.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MACOSX_DEPLOYMENT_TARGET: "14.2"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ""
+targets:
+  Son:
+    type: application
+    platform: macOS
+    sources:
+      - path: Son
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.zwgagne.Son
+        PRODUCT_NAME: Son
+        INFOPLIST_FILE: Son/Info.plist
+        SWIFT_OBJC_BRIDGING_HEADER: Son/Son-Bridging-Header.h
+        CLANG_CXX_LANGUAGE_STANDARD: c++20
+        GENERATE_INFOPLIST_FILE: NO
+        ENABLE_HARDENED_RUNTIME: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+    dependencies:
+      - sdk: CoreAudio.framework
+      - sdk: AudioToolbox.framework
+      - sdk: Accelerate.framework
+  SonTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: SonTests
+    dependencies:
+      - target: Son
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.zwgagne.SonTests
+schemes:
+  Son:
+    build:
+      targets:
+        Son: all
+        SonTests: [test]
+    test:
+      targets:
+        - SonTests
